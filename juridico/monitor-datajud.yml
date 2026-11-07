@@ -1,0 +1,47 @@
+name: Monitor DataJud
+
+# Consulta diariamente os processos cadastrados no secret DATAJUD_PROCESSOS
+# e publica as movimentações recentes no resumo da execução (aba Actions).
+# Rotinas agendadas só rodam a partir do branch padrão (main).
+# USE SOMENTE EM REPOSITÓRIO PRIVADO: em repositório público, o resumo
+# da execução (com números e movimentações) fica visível para qualquer um.
+# Copie para .github/workflows/ do repositório privado, junto com datajud.py
+# em juridico/datajud.py.
+
+on:
+  schedule:
+    - cron: "17 10 * * 1-5" # dias úteis, 07:17 (horário de Brasília)
+  workflow_dispatch:
+    inputs:
+      dias:
+        description: "Janela de dias a verificar"
+        default: "7"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  monitorar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install pandas requests
+
+      - name: Consultar DataJud
+        env:
+          DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
+          DATAJUD_PROCESSOS: ${{ secrets.DATAJUD_PROCESSOS }}
+          DIAS: ${{ github.event.inputs.dias || '1' }}
+        run: |
+          if [ -z "$DATAJUD_API_KEY" ] || [ -z "$DATAJUD_PROCESSOS" ]; then
+            echo "⚠️ Cadastre os secrets DATAJUD_API_KEY e DATAJUD_PROCESSOS (veja juridico/README.md)." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python juridico/datajud.py --lista "$DATAJUD_PROCESSOS" --dias "$DIAS" --saida "$GITHUB_STEP_SUMMARY"
