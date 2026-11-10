@@ -16,6 +16,7 @@ fonte oficial.
 | [WrGDev/advogado-skills](https://github.com/WrGDev/advogado-skills) | `3f24714` | MIT (declarada no README; o repositório não traz arquivo `LICENSE`) | 5 |
 | [thicazu-png/claude-skills-advocacia](https://github.com/thicazu-png/claude-skills-advocacia) | `bd089da` | MIT, © 2026 Thiago Cazú: ver [`LICENSE-thicazu-claude-skills-advocacia.txt`](LICENSE-thicazu-claude-skills-advocacia.txt) | 10 |
 | [anthropics/skills](https://github.com/anthropics/skills) | `2c5958e` | Apache 2.0 (`LICENSE.txt` em cada pasta); componentes de terceiros em [`THIRD_PARTY_NOTICES-anthropic-skills.md`](THIRD_PARTY_NOTICES-anthropic-skills.md) | 19 |
+| [PracticalSwan/agent-skills](https://github.com/PracticalSwan/agent-skills) (seleção) | `6cf6351` | MIT, © 2026 Sithu Win San: ver [`LICENSE-practicalswan-agent-skills.txt`](LICENSE-practicalswan-agent-skills.txt). `spreadsheet-formula-helper` vem de ComposioHQ/awesome-codex-skills (commit `0930e13`), segundo o registro do autor; a licença dessa origem não foi conferida | 2 |
 
 ## Catálogo
 
@@ -58,6 +59,21 @@ fonte oficial.
 | `visual-law-legal-design` | Visual Law e legal design |
 | `business-tech-contract-review` | Revisão de contratos empresariais e de tecnologia |
 | `legal-ops-ai-management` | Gestão de escritório com IA |
+
+### Seleção de PracticalSwan/agent-skills
+
+| Skill | Finalidade |
+|---|---|
+| `document-metadata-review` | Verifica metadados, comentários, controle de alterações, links e conteúdo oculto em PDF, DOCX, PPTX e XLSX antes de compartilhar |
+| `spreadsheet-formula-helper` | Escreve e corrige fórmulas de Excel e Google Sheets, com exemplos e casos-limite |
+
+Das 253 skills do repositório, só estas duas foram importadas. Ficaram de fora:
+
+- as de programação e de plataformas (Figma, Netlify, Vercel, MongoDB, HuggingFace e outras);
+- as 8 duplicadas das da Anthropic;
+- a família `avoid-ai-writing`/`humanizer`, calibrada para inglês segundo o próprio autor;
+- `writing-guidelines`, que carrega regras de um site externo a cada uso;
+- `doc` e `research`, que se sobrepõem a skills já existentes.
 
 ### Skills originais deste repositório
 
