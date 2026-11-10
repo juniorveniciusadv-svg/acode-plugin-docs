@@ -8,6 +8,24 @@ As skills jurídicas apoiam o trabalho do advogado e não substituem a revisão,
 responsabilidade profissional. Normas, precedentes, prazos e cálculos devem sempre ser conferidos em
 fonte oficial.
 
+## Catálogo
+
+A ficha de cada skill está em [`_catalogo/catalogo-skills.csv`](_catalogo/catalogo-skills.csv), também em Excel ([`_catalogo/catalogo-skills.xlsx`](_catalogo/catalogo-skills.xlsx)). A ficha tem 11 campos:
+
+- nome e categoria;
+- tarefa;
+- origem e responsável;
+- compatibilidade;
+- entradas;
+- saídas;
+- fontes exigidas;
+- permissões;
+- riscos e restrições;
+- validação;
+- revisão.
+
+Ao incluir, alterar ou remover uma skill, atualize o catálogo.
+
 ## Procedência e licenças
 
 | Origem | Commit importado | Licença | Skills |
