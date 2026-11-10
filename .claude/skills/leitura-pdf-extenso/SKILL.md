@@ -105,7 +105,7 @@ Conforme o objetivo:
 - pontos controvertidos, decisões pendentes, prazos e riscos;
 - contradições e lacunas.
 
-Cada afirmação leva referência: "(ID 40000015, pág. 3; p. 984 do PDF)". Para aprofundar fatos e provas, usar `organizar-fatos-provas`; para estratégia, `triagem-estrategia-juridica`.
+Cada afirmação leva referência: "(ID 40000015, pág. 3; p. 984 do PDF)". Para estruturar o pedido de cronologia e análise de padrões e as perguntas de acompanhamento, e para a conferência final, usar `references/modelo-pedido-cronologia.md`, que traz contexto, entregas, formato de memorando, perguntas úteis, checklist e cuidados de sigilo. Para aprofundar fatos e provas, usar `organizar-fatos-provas`; para estratégia, `triagem-estrategia-juridica`.
 
 ## 8. Verificação antes de entregar
 
