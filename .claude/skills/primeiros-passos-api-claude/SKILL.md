@@ -1,6 +1,6 @@
 ---
 name: primeiros-passos-api-claude
-description: Guia em português para começar a usar a API do Claude — criar conta no Claude Console, autenticar pela CLI `ant` ou por chave de API, fazer a primeira chamada à Messages API (cURL, CLI, Python, TypeScript e outros SDKs) e cuidar de segurança, sigilo profissional e LGPD antes de enviar dados de clientes. Use quando o usuário quiser fazer a primeira chamada à API, configurar a autenticação ou entender o passo a passo inicial; para detalhes técnicos avançados (ferramentas, streaming, cache, modelos e preços), use a skill `claude-api`.
+description: Guia em português para começar a usar a API do Claude — criar conta no Claude Console, autenticar pela CLI `ant` ou por chave de API, fazer a primeira chamada à Messages API (cURL, CLI, Python, TypeScript e outros SDKs) e cuidar de segurança, sigilo profissional e LGPD antes de enviar dados de clientes; inclui recursos beta (cabeçalho `anthropic-beta`, parâmetro `betas` do SDK) e os cabeçalhos obrigatórios por endpoint, como `managed-agents-2026-04-01`. Use quando o usuário quiser fazer a primeira chamada à API, configurar a autenticação ou entender o passo a passo inicial; para detalhes técnicos avançados (ferramentas, streaming, cache, modelos e preços), use a skill `claude-api`.
 ---
 
 # Primeiros passos com a API do Claude
@@ -146,7 +146,43 @@ A API devolve um JSON com, entre outros campos:
 - **Custos:** o uso é cobrado por tokens; acompanhar o consumo no Claude Console e definir limites de gasto.
 - **Revisão humana:** respostas da API são rascunhos; citações, dispositivos e precedentes devem ser conferidos nas fontes oficiais (skill `pesquisa-juridica-brasileira`).
 
-## 4. Próximos passos
+## 4. Recursos beta (cabeçalho `anthropic-beta`)
+
+Recursos experimentais são liberados por um cabeçalho beta antes de entrarem na API padrão.
+
+- **Como ativar:** pela HTTP, com o cabeçalho `anthropic-beta: NOME-DO-BETA`; pelo SDK, com o namespace `client.beta` e o parâmetro `betas`. O SDK monta o cabeçalho sozinho.
+
+  ```python
+  response = client.beta.messages.create(
+      model="claude-opus-5-5",
+      max_tokens=1024,
+      messages=[{"role": "user", "content": "Olá, Claude"}],
+      betas=["context-management-2025-06-27"],
+  )
+  ```
+
+  Na CLI: `ant beta:messages create --beta context-management-2025-06-27 ...`.
+- **Vários betas:** nomes separados por vírgula num único cabeçalho (`anthropic-beta: beta1,beta2`) ou `betas=["beta1", "beta2"]` no SDK. Prefira sempre um único cabeçalho: no Google Cloud gerenciado pelo Google, só o primeiro é lido.
+- **Nome exato:** o padrão é `nome-do-recurso-AAAA-MM-DD`, e a data é a do lançamento do beta. Copiar o nome da documentação do recurso; nome errado, ou beta a que a organização não tem acesso, retorna erro `400 invalid_request_error`.
+- **Riscos:** betas podem mudar de forma incompatível, ser descontinuados, ter limites e preços diferentes e não estar disponíveis em todas as regiões ou plataformas. Não construir rotina crítica do escritório sobre um beta sem plano para quando ele mudar.
+- **Amazon Bedrock:** nos endpoints `bedrock-mantle`, o nome vai no cabeçalho `anthropic-beta`; na API InvokeModel (legada), vai no corpo da requisição, no array `"anthropic_beta"`.
+
+### Cabeçalhos obrigatórios por endpoint
+
+Algumas APIs em beta exigem o próprio cabeçalho em toda requisição:
+
+| Endpoints | Cabeçalho beta |
+|---|---|
+| `/v1/agents`, `/v1/sessions`, `/v1/environments` (Managed Agents) | `managed-agents-2026-04-01` |
+| `/v1/tunnels` (túneis MCP) | `mcp-tunnels-2026-06-22` |
+| `/v1/memory_stores` e sub-recursos (memória do agente) | `agent-memory-2026-07-22` |
+
+- **`managed-agents-2026-04-01`** libera o **Managed Agents**: agentes hospedados pela Anthropic, com configuração salva e versionada (`/v1/agents`), sessões de trabalho (`/v1/sessions`) e um ambiente isolado (`/v1/environments`) onde o agente lê e grava arquivos e executa comandos.
+- **Pelo SDK** (`client.beta.agents`, `client.beta.sessions` etc.), esses cabeçalhos são enviados automaticamente. Só é preciso informá-los em requisições HTTP diretas.
+- **Na memória do agente**, `agent-memory-2026-07-22` substitui o `managed-agents-2026-04-01`: enviar os dois na mesma requisição dá erro 400.
+- **Para montar um agente**, carregar a skill `claude-api` (seção Managed Agents), que tem o roteiro completo de configuração. Antes de dar a um agente acesso a documentos de clientes, aplicar os cuidados de sigilo e LGPD da seção 3.
+
+## 5. Próximos passos
 
 - Conversas de vários turnos, prompt de sistema e motivos de parada: página "Trabalhando com a Messages API".
 - Comparação de modelos por capacidade e custo: "Visão geral dos modelos".
@@ -157,4 +193,4 @@ Para qualquer desses tópicos, carregar a skill `claude-api`.
 
 ## Fonte
 
-Documentação oficial da Anthropic, página "Comece a usar o Claude" (https://platform.claude.com/docs/pt-BR/get-started), conforme o texto fornecido pelo usuário em 10/11/2026. Os exemplos foram resumidos e a pergunta de exemplo foi adaptada ao contexto jurídico; comandos, versões e nomes de modelo seguem a página consultada. Em caso de divergência, prevalece a versão atual da documentação oficial.
+Documentação oficial da Anthropic, páginas "Comece a usar o Claude" (https://platform.claude.com/docs/pt-BR/get-started) e "Cabeçalhos beta" (https://platform.claude.com/docs/pt-BR/api/beta-headers), conforme os textos fornecidos pelo usuário em 10/11/2026. Os exemplos foram resumidos e a pergunta de exemplo foi adaptada ao contexto jurídico; comandos, versões e nomes de modelo seguem a página consultada. Em caso de divergência, prevalece a versão atual da documentação oficial.

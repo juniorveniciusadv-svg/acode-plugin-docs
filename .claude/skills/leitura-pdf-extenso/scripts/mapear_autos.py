@@ -75,7 +75,7 @@ DATA_RE = re.compile(r"\b(\d{2}/\d{2}/\d{4})\b")
 
 def contar_paginas(pdf: Path) -> int:
     if shutil.which("pdfinfo"):
-        saida = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True)
+        saida = subprocess.run(["pdfinfo", str(pdf)], capture_output=True, text=True, check=False)
         m = re.search(r"^Pages:\s+(\d+)", saida.stdout, re.MULTILINE)
         if m:
             return int(m.group(1))
@@ -90,6 +90,7 @@ def extrair_paginas(pdf: Path, total: int):
         proc = subprocess.run(
             ["pdftotext", "-layout", "-enc", "UTF-8", str(pdf), "-"],
             capture_output=True,
+            check=False,
         )
         if proc.returncode == 0:
             partes = proc.stdout.decode("utf-8", errors="replace").split("\f")
@@ -110,7 +111,7 @@ def extrair_paginas(pdf: Path, total: int):
     for i, pagina in enumerate(leitor.pages, start=1):
         try:
             texto = pagina.extract_text() or ""
-        except Exception as erro:  # página corrompida não deve interromper o mapeamento
+        except Exception as erro:  # noqa: BLE001 - página corrompida não deve interromper o mapeamento
             print(f"Aviso: falha ao extrair a página {i}: {erro}", file=sys.stderr)
             texto = ""
         yield i, texto
@@ -154,9 +155,7 @@ def inicio_de_documento(reg: dict, ultimo_pje_id: str | None) -> bool:
         return True
     if "pje_id" in reg and ultimo_pje_id is not None and reg["pje_id"] != ultimo_pje_id:
         return True
-    if "pje_id" not in reg and not reg["sem_texto"] and reg["tipos_provaveis"]:
-        return True
-    return False
+    return "pje_id" not in reg and not reg["sem_texto"] and bool(reg["tipos_provaveis"])
 
 
 def faixas(numeros: list[int]) -> list[str]:
@@ -193,22 +192,24 @@ def main() -> int:
     pasta_lotes.mkdir(parents=True, exist_ok=True)
 
     registros: list[dict] = []
-    arquivo_lote = None
+    lote_atual: list[str] = []
+    lote_inicio = 1
+
+    def gravar_lote(fim: int) -> None:
+        indice_lote = (lote_inicio - 1) // args.lote + 1
+        nome = f"lote-{indice_lote:04d}_p{lote_inicio:05d}-{fim:05d}.txt"
+        (pasta_lotes / nome).write_text("".join(lote_atual), encoding="utf-8")
+
     with open(args.saida / "paginas.jsonl", "w", encoding="utf-8") as jsonl:
         for numero, texto in extrair_paginas(args.pdf, total):
-            if (numero - 1) % args.lote == 0:
-                if arquivo_lote:
-                    arquivo_lote.close()
-                fim = min(numero + args.lote - 1, total)
-                indice_lote = (numero - 1) // args.lote + 1
-                nome = f"lote-{indice_lote:04d}_p{numero:05d}-{fim:05d}.txt"
-                arquivo_lote = open(pasta_lotes / nome, "w", encoding="utf-8")
-            arquivo_lote.write(f"===== PÁGINA {numero} =====\n{texto.rstrip()}\n\n")
+            lote_atual.append(f"===== PÁGINA {numero} =====\n{texto.rstrip()}\n\n")
             reg = analisar(numero, texto)
             registros.append(reg)
             jsonl.write(json.dumps(reg, ensure_ascii=False) + "\n")
-    if arquivo_lote:
-        arquivo_lote.close()
+            if numero % args.lote == 0 or numero == total:
+                gravar_lote(numero)
+                lote_atual = []
+                lote_inicio = numero + 1
 
     sem_texto = [r["pagina"] for r in registros if r["sem_texto"]]
     documentos = []
