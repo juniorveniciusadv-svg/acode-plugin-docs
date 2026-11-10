@@ -95,6 +95,7 @@ Das 253 skills do repositório, só estas duas foram importadas. Ficaram de fora
 |---|---|
 | `habilidades-profissionais-advocacia` | Soft skills aplicadas: negociação, comunicação com o cliente, ética, organização, delegação, tecnologia, argumentação, adaptação e plano de desenvolvimento |
 | `revisao-formatacao-word` | Revisão editorial e formatação de documentos por estilos do Word, com entrega em quatro partes: texto revisado, especificação de formatação, resumo das alterações e pendências. Texto fornecido pelo dono do repositório |
+| `copilot-revisao-codigo` | Guia para solicitar, configurar e personalizar a revisão de código do GitHub Copilot (GitHub.com, IDEs, CLI, API), com níveis de esforço, aprovações, instruções personalizadas, skills e MCP. Resume a documentação oficial do GitHub, fornecida pelo dono do repositório |
 | `editor-word-profissional` | Revisão, edição e formatação de arquivos .docx em português brasileiro, com escopo diferenciado (revisão, edição, formatação ou trabalho completo) e trabalho sempre em nova versão. Texto fornecido pelo dono do repositório; **incompleto a partir da seção 3**, aguardando o restante |
 
 Texto original, escrito para este repositório. Os temas foram identificados em artigos da Thomson Reuters Brasil, da Esade e da EPD, listados em `habilidades-profissionais-advocacia/references/fontes.md`, sem reprodução do conteúdo deles.
