@@ -88,7 +88,7 @@ Antes de entregar, verificar:
 - os recursos visuais ajudam ou apenas enfeitam? retirar os que não acrescentam;
 - competência, legitimidade, interesse, adequação da via, tempestividade e preparo foram enfrentados?
 
-Para auditoria pré-protocolo completa, aplicar `revisar-peca-juridica`.
+Para auditoria pré-protocolo completa, aplicar `revisar-peca-juridica`. Para a passagem editorial final (copidesque, checagem de nomes, datas, números e citações, prova da versão diagramada, sumário e legendas), aplicar o checklist do editor em `../revisao-formatacao-word/references/padrao-profissional-edicao.md`.
 
 ## Entrega
 

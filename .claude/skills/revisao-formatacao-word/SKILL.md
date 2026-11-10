@@ -62,6 +62,10 @@ Apresente:
 
 Se houver ferramenta para editar o arquivo, aplique as alterações permitidas e informe o que foi efetivamente realizado. Caso contrário, entregue o texto e as instruções, sem afirmar que modificou o arquivo.
 
+## Padrão profissional de edição
+
+Em trabalhos de edição ou "trabalho completo", conduzir as etapas acima pelo fluxo em camadas descrito em `references/padrao-profissional-edicao.md` (avaliação do original, planejamento editorial, edição estrutural, edição de linha, copidesque, checagem de fatos, diagramação e prova final, elementos de apoio, direitos e permissões, diálogo com o autor) e aplicar o checklist do editor antes da entrega. Quando o pedido for só revisão, ou na prova final, aplicar as técnicas da seção "Revisão de provas" do mesmo arquivo (marcação rastreável, cotejo com o original, verificação das emendas, leitura em voz alta de trechos críticos, consulta a obras de referência e conferência de layout).
+
 ## Edição do arquivo .docx
 
 Quando o usuário fornecer um arquivo `.docx` e a skill `docx` estiver disponível, use-a para ler o documento e aplicar as alterações diretamente no arquivo, preferindo estilos de parágrafo nativos do Word em vez de formatação manual. Ao final, informe apenas as alterações efetivamente aplicadas e liste à parte as que ficaram como sugestão.

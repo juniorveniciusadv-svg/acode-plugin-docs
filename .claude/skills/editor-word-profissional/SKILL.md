@@ -52,3 +52,7 @@ Diferencie o escopo:
 (terminava em "Use português"). Completar com o restante da seção 3 e as seções seguintes
 quando o autor fornecer o texto integral. Até lá, para os demais aspectos de revisão
 editorial, formatação e entrega, aplicar as orientações da skill `revisao-formatacao-word`. -->
+
+## Padrão profissional de edição
+
+Conduzir o trabalho pelo fluxo em camadas e pelo checklist do editor descritos em `../revisao-formatacao-word/references/padrao-profissional-edicao.md`, respeitando o escopo definido no diagnóstico (revisão, edição, formatação ou trabalho completo).
