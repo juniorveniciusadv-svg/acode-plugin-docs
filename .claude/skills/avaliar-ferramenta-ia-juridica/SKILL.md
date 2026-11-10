@@ -40,6 +40,8 @@ Levantar por escrito, com o documento do fornecedor que comprova cada resposta:
 - **Sigilo profissional:** a inviolabilidade do sigilo é dever do advogado (Estatuto da Advocacia, Lei 8.906/1994, e Código de Ética e Disciplina da OAB — conferir dispositivos e eventuais orientações recentes da OAB sobre uso de IA). Avaliar se o arranjo permite cumprir esse dever, inclusive para processos em segredo de justiça.
 - **Ferramentas gratuitas ou de uso pessoal:** em regra inadequadas para dados de clientes, salvo termos que garantam não uso para treinamento e controle de retenção.
 
+Para enviar ao fornecedor, usar o questionário completo em `references/questionario-seguranca-fornecedor.md`: dez blocos, matriz de pontuação e sinais de alerta.
+
 ## 3. Adequação ao Direito brasileiro
 
 - A ferramenta conhece legislação, jurisprudência e terminologia brasileiras atuais, ou foi construída sobretudo com conteúdo estrangeiro?
@@ -86,7 +88,7 @@ Para conferir citações, usar `pesquisa-juridica-brasileira` e, se disponível,
 | Custo total | | | | |
 
 2. Piloto de 30 a 60 dias com um grupo pequeno, métricas definidas e um responsável.
-3. Política interna de uso: tarefas permitidas e proibidas, dados que podem ou não ser inseridos, revisão humana obrigatória, registro de uso nas entregas relevantes. Para estruturar a governança, pode-se combinar com `legal-ops-ai-management`.
+3. Política interna de uso: tarefas permitidas e proibidas, dados que podem ou não ser inseridos, revisão humana obrigatória, registro de uso nas entregas relevantes. Há um modelo pronto para adaptar em `references/modelo-politica-ia-escritorio.md`, com cláusula para o contrato de honorários e roteiro de incidentes. Para estruturar a governança, pode-se combinar com `legal-ops-ai-management`.
 4. Reavaliação ao fim do piloto: manter, ajustar ou descontinuar.
 
 ## Entrega
