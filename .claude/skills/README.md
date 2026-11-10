@@ -16,6 +16,7 @@ fonte oficial.
 | [WrGDev/advogado-skills](https://github.com/WrGDev/advogado-skills) | `3f24714` | MIT (declarada no README; o repositório não traz arquivo `LICENSE`) | 5 |
 | [thicazu-png/claude-skills-advocacia](https://github.com/thicazu-png/claude-skills-advocacia) | `bd089da` | MIT, © 2026 Thiago Cazú: ver [`LICENSE-thicazu-claude-skills-advocacia.txt`](LICENSE-thicazu-claude-skills-advocacia.txt) | 10 |
 | [anthropics/skills](https://github.com/anthropics/skills) | `2c5958e` | Apache 2.0 (`LICENSE.txt` em cada pasta); componentes de terceiros em [`THIRD_PARTY_NOTICES-anthropic-skills.md`](THIRD_PARTY_NOTICES-anthropic-skills.md) | 19 |
+| [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) (seleção, localizada via skillsclaude.org) | `55d9399` | Conteúdo em CC BY 4.0 (exige atribuição; autor indicado na skill: "renat"); código em MIT: ver [`LICENSE-CONTENT-sickn33-agentic-awesome-skills.txt`](LICENSE-CONTENT-sickn33-agentic-awesome-skills.txt) e [`LICENSE-sickn33-agentic-awesome-skills.txt`](LICENSE-sickn33-agentic-awesome-skills.txt) | 1 |
 | [PracticalSwan/agent-skills](https://github.com/PracticalSwan/agent-skills) (seleção) | `6cf6351` | MIT, © 2026 Sithu Win San: ver [`LICENSE-practicalswan-agent-skills.txt`](LICENSE-practicalswan-agent-skills.txt). `spreadsheet-formula-helper` vem de ComposioHQ/awesome-codex-skills (commit `0930e13`), segundo o registro do autor; a licença dessa origem não foi conferida | 2 |
 
 ## Catálogo
@@ -59,6 +60,19 @@ fonte oficial.
 | `visual-law-legal-design` | Visual Law e legal design |
 | `business-tech-contract-review` | Revisão de contratos empresariais e de tecnologia |
 | `legal-ops-ai-management` | Gestão de escritório com IA |
+
+### Seleção de sickn33/agentic-awesome-skills
+
+| Skill | Finalidade |
+|---|---|
+| `advogado-criminal` | Roteiro de pesquisa e verificação em direito penal brasileiro e na Lei Maria da Penha: enquadramento, materialidade e autoria, dosimetria estimada, questões processuais, teses, cenários e resumo para revisão profissional |
+
+Atribuição (CC BY 4.0): skill `advogado-criminal` do repositório sickn33/agentic-awesome-skills, autoria indicada como "renat". Copiada sem modificações.
+
+Não foi importada a `advogado-especialista`, do mesmo repositório, por dois motivos:
+
+- ela se sobrepõe a `advogado` e a `pesquisa-juridica-brasileira`;
+- o guia de referência dela tem imprecisão: atribui a competência do ITCMD sempre ao Estado do domicílio do falecido, quando, para imóveis, o imposto cabe ao Estado da situação do bem (CF, art. 155, § 1º, I).
 
 ### Seleção de PracticalSwan/agent-skills
 
