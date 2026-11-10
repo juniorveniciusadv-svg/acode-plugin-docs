@@ -26,6 +26,28 @@ A ficha de cada skill está em [`_catalogo/catalogo-skills.csv`](_catalogo/catal
 
 Ao incluir, alterar ou remover uma skill, atualize o catálogo.
 
+## Critérios para incluir ou criar skills
+
+Baseados no artigo da Anthropic "Equipping agents for the real world with Agent Skills" (16/10/2025) e na página oficial "Melhores práticas para criação de Skills" (platform.claude.com/docs/pt-BR/agents-and-tools/agent-skills/best-practices), consultados em 10/11/2026.
+
+**Segurança (skills de terceiros)**
+
+- Incluir apenas skills de fontes confiáveis; as de fontes menos confiáveis passam por auditoria antes do uso.
+- Ler todos os arquivos empacotados: instruções, referências, scripts, dependências e recursos como imagens.
+- Recusar instruções ou código que mandem o Claude se conectar a fontes externas não confiáveis ou carregar regras remotas a cada uso.
+- Verificar a licença: sem licença que permita redistribuição, a skill não entra neste repositório público.
+
+**Qualidade (skills criadas aqui)**
+
+- `name`: até 64 caracteres, só letras minúsculas, números e hífens, sem as palavras reservadas `anthropic` e `claude`.
+- `description`: até 1.024 caracteres, em terceira pessoa, dizendo o que a skill faz e quando usá-la, com termos-chave.
+- Corpo do `SKILL.md` com menos de 500 linhas; detalhes em arquivos de referência ligados diretamente ao `SKILL.md` (um só nível); referências com mais de 100 linhas abrem com sumário.
+- Terminologia consistente, exemplos concretos, caminhos com barra normal, sem informação sensível ao tempo fora de seção própria.
+- Scripts tratam os próprios erros, justificam constantes, listam dependências e dizem se devem ser executados ou apenas lidos.
+- Avaliar com pelo menos três cenários reais antes de considerar a skill validada, e registrar o resultado no campo "Validação" do catálogo.
+
+Última auditoria automática (10/11/2026): todas as skills criadas aqui cumprem as regras de nome, descrição, tamanho e caminhos. A importada `claude-api`, skill oficial da Anthropic mantida sem alterações, não as cumpre: usa palavra reservada no nome, tem descrição com 1.068 caracteres e corpo com 608 linhas.
+
 ## Procedência e licenças
 
 | Origem | Commit importado | Licença | Skills |
@@ -116,7 +138,7 @@ Das 253 skills do repositório, só estas duas foram importadas. Ficaram de fora
 | `peticao-profissional-visual-law` | Petições e manifestações com argumentação em camadas (norma, interpretação, doutrina, jurisprudência, aplicação, refutação, pedidos) e recursos de Visual Law sóbrios e acessíveis, com especificação para Word e checklist de protocolo. Escrita para este repositório |
 | `avaliar-ferramenta-ia-juridica` | Avaliação neutra de ferramentas de IA para advocacia (generalistas, jurídicas especializadas, integradas à gestão, automação documental): diligência de sigilo e LGPD, adequação ao direito brasileiro, teste com casos reais anonimizados, custo total e piloto. Estrutura temática de artigo do blog ADVBOX, sem as recomendações comerciais |
 | `leitura-pdf-extenso` | Leitura e análise de PDFs com centenas a milhares de páginas (autos completos), com o script `scripts/mapear_autos.py`, que mapeia texto por página, índice provável das peças (ID do PJe, assinatura), páginas para OCR e lotes numerados; leitura dirigida ou integral com fichamento em arquivo e citação de página. Script testado em PDF simulado de 2.100 páginas |
-| `primeiros-passos-api-claude` | Guia em português para a primeira chamada à API do Claude (conta, autenticação pela CLI `ant` ou chave, cURL, CLI, Python, TypeScript), com cuidados de sigilo, LGPD, segurança da chave e custos, e recursos beta (cabeçalho `anthropic-beta`, cabeçalhos por endpoint como `managed-agents-2026-04-01`). Resume as páginas oficiais "Comece a usar o Claude" e "Cabeçalhos beta"; para detalhes técnicos, remete à skill `claude-api` |
+| `primeiros-passos-api` | Guia em português para a primeira chamada à API do Claude (conta, autenticação pela CLI `ant` ou chave, cURL, CLI, Python, TypeScript), com cuidados de sigilo, LGPD, segurança da chave e custos, e recursos beta (cabeçalho `anthropic-beta`, cabeçalhos por endpoint como `managed-agents-2026-04-01`). Resume as páginas oficiais "Comece a usar o Claude" e "Cabeçalhos beta"; para detalhes técnicos, remete à skill `claude-api` |
 | `copilot-revisao-codigo` | Guia para solicitar, configurar e personalizar a revisão de código do GitHub Copilot (GitHub.com, IDEs, CLI, API), com níveis de esforço, aprovações, instruções personalizadas, skills e MCP. Resume a documentação oficial do GitHub, fornecida pelo dono do repositório |
 | `editor-word-profissional` | Revisão, edição e formatação de arquivos .docx em português brasileiro, com escopo diferenciado (revisão, edição, formatação ou trabalho completo) e trabalho sempre em nova versão. Texto fornecido pelo dono do repositório; **incompleto a partir da seção 3**, aguardando o restante |
 

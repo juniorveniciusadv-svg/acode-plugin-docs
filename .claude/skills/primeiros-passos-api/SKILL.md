@@ -1,5 +1,5 @@
 ---
-name: primeiros-passos-api-claude
+name: primeiros-passos-api
 description: Guia em português para começar a usar a API do Claude — criar conta no Claude Console, autenticar pela CLI `ant` ou por chave de API, fazer a primeira chamada à Messages API (cURL, CLI, Python, TypeScript e outros SDKs) e cuidar de segurança, sigilo profissional e LGPD antes de enviar dados de clientes; inclui recursos beta (cabeçalho `anthropic-beta`, parâmetro `betas` do SDK) e os cabeçalhos obrigatórios por endpoint, como `managed-agents-2026-04-01`. Use quando o usuário quiser fazer a primeira chamada à API, configurar a autenticação ou entender o passo a passo inicial; para detalhes técnicos avançados (ferramentas, streaming, cache, modelos e preços), use a skill `claude-api`.
 ---
 

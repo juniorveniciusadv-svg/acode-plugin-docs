@@ -187,9 +187,17 @@ def main() -> int:
         print("--lote deve ser maior que zero", file=sys.stderr)
         return 2
 
-    total = contar_paginas(args.pdf)
+    try:
+        total = contar_paginas(args.pdf)
+    except Exception as erro:  # noqa: BLE001 - PDF corrompido ou protegido por senha
+        print(f"Não foi possível abrir o PDF ({erro}). Se estiver protegido por senha, peça a versão sem proteção.", file=sys.stderr)
+        return 2
     pasta_lotes = args.saida / "lotes"
-    pasta_lotes.mkdir(parents=True, exist_ok=True)
+    try:
+        pasta_lotes.mkdir(parents=True, exist_ok=True)
+    except OSError as erro:
+        print(f"Não foi possível criar a pasta de saída {args.saida}: {erro}", file=sys.stderr)
+        return 2
 
     registros: list[dict] = []
     lote_atual: list[str] = []
