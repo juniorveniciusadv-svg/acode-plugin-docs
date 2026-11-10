@@ -59,11 +59,12 @@ fonte oficial.
 | `business-tech-contract-review` | Revisão de contratos empresariais e de tecnologia |
 | `legal-ops-ai-management` | Gestão de escritório com IA |
 
-### Skill original deste repositório
+### Skills originais deste repositório
 
 | Skill | Finalidade |
 |---|---|
 | `habilidades-profissionais-advocacia` | Soft skills aplicadas: negociação, comunicação com o cliente, ética, organização, delegação, tecnologia, argumentação, adaptação e plano de desenvolvimento |
+| `revisao-formatacao-word` | Revisão editorial e formatação de documentos por estilos do Word, com entrega em quatro partes: texto revisado, especificação de formatação, resumo das alterações e pendências. Texto fornecido pelo dono do repositório |
 
 Texto original, escrito para este repositório. Os temas foram identificados em artigos da Thomson Reuters Brasil, da Esade e da EPD, listados em `habilidades-profissionais-advocacia/references/fontes.md`, sem reprodução do conteúdo deles.
 
