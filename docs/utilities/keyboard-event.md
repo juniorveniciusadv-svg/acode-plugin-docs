@@ -80,14 +80,14 @@ const arrowLeft = createKeyboardEvent('keydown', {
 ### Simulating Shortcuts
 
 ```js
-// Build a Ctrl+Alt+Delete event (it only reaches listeners; it does not trigger any operating system action)
+// Create a Ctrl+Alt+Delete event (it only reaches listeners; it does not trigger any operating system action)
 const ctrlAltDel = createKeyboardEvent('keydown', {
 		key: 'Delete',
 		ctrlKey: true,
 		altKey: true
 });
 
-// Simulate Shift+Enter
+// Create Shift+Enter
 const shiftEnter = createKeyboardEvent('keydown', {
 		key: 'Enter',
 		shiftKey: true
