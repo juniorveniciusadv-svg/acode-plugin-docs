@@ -14,12 +14,19 @@ const createKeyboardEvent = acode.require('createKeyboardEvent');
 // Create a keyboard event
 const event = createKeyboardEvent('keydown', {
 		key: 'Enter',
-		ctrlKey: true
+		ctrlKey: true,
+		bubbles: true
 });
 
-// Dispatch the event
-document.dispatchEvent(event);
+// Dispatch the event on the element that should receive it
+(document.activeElement || document).dispatchEvent(event);
 ```
+
+::: warning Synthetic events
+Events created from code are not trusted (`event.isTrusted` is `false`). They only reach the listeners that handle them; the browser does not perform the default action, such as inserting a character or a line break.
+
+To reach a listener attached to an element, dispatch the event on that element (for example `document.activeElement`) and set `bubbles: true`, instead of dispatching only on `document`. A full key press is a `keydown` followed by a `keyup`.
+:::
 
 ## API Reference
 
@@ -37,7 +44,7 @@ Creates a new keyboard event with the specified type and options.
 	- `key` (*string*) - The key value (e.g. 'Enter', 'a', 'ArrowLeft')
 	- `keyCode` (*number*) - The key code (optional if key is specified)
 	- `which` (*number*) - The which code (optional if key is specified)
-	- `ctrlKey` (*boolean*) - Whether Ctrl key is pressed
+	- `ctrlKey` (*boolean*) - Whether Ctrl key is pressed (on macOS the shortcut modifier is usually Command, so use `metaKey`)
 	- `shiftKey` (*boolean*) - Whether Shift key is pressed
 	- `altKey` (*boolean*) - Whether Alt key is pressed
 	- `metaKey` (*boolean*) - Whether Meta/Command key is pressed
@@ -58,7 +65,7 @@ const enterPress = createKeyboardEvent('keydown', {
 		key: 'Enter'
 });
 
-// Create Ctrl+S combination
+// Create Ctrl+S combination (use `metaKey: true` for Command+S on macOS)
 const ctrlS = createKeyboardEvent('keydown', {
 		key: 's',
 		ctrlKey: true
@@ -73,7 +80,7 @@ const arrowLeft = createKeyboardEvent('keydown', {
 ### Simulating Shortcuts
 
 ```js
-// Simulate Ctrl+Alt+Delete
+// Build a Ctrl+Alt+Delete event (it only reaches listeners; it does not trigger any operating system action)
 const ctrlAltDel = createKeyboardEvent('keydown', {
 		key: 'Delete',
 		ctrlKey: true,
