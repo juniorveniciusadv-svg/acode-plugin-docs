@@ -75,40 +75,57 @@ if (keyboard.escKey) {
 
 ## Example Plugin
 
-Here's a complete example of using the keyboard API in an Acode plugin:
+Here's a complete example of using the keyboard API in an Acode plugin. Listeners are registered inside `init` and removed in `destroy`, so they do not pile up when the plugin is disabled or reloaded (see [Understanding Plugins](../getting-started/understanding-plugin.md)).
 
 ```js
+import plugin from "../plugin.json";
+
 class KeyboardPlugin {
-		constructor() {
-				const keyboard = acode.require('keyboard');
+	keyboard = null;
 
-				// Add keyboard show/hide listeners
-				keyboard.on('keyboardShow', () => {
-						acode.alert('Keyboard shown');
-				});
+	onShow = () => {
+		console.log("Soft keyboard shown");
+	};
 
-				keyboard.on('keyboardHide', () => {
-						acode.alert('Keyboard hidden');
-				});
+	onHide = () => {
+		console.log("Soft keyboard hidden");
+	};
 
-				// Listen for Ctrl+S shortcut
-				keyboard.on('key', (e) => {
-						if (e.key === 's' && e.ctrlKey) {
-								acode.alert('Saving file...');
-						}
-				});
+	onKey = (e) => {
+		// Compare in lowercase so Shift/Caps Lock don't break the match, and
+		// accept Ctrl (Windows/Linux) or Command (macOS).
+		if (e.key?.toLowerCase() === "s" && (e.ctrlKey || e.metaKey)) {
+			console.log("Save shortcut pressed");
 		}
+	};
+
+	async init() {
+		this.keyboard = acode.require("keyboard");
+		this.keyboard.on("keyboardShow", this.onShow);
+		this.keyboard.on("keyboardHide", this.onHide);
+		this.keyboard.on("key", this.onKey);
+	}
+
+	async destroy() {
+		if (!this.keyboard) return;
+		this.keyboard.off("keyboardShow", this.onShow);
+		this.keyboard.off("keyboardHide", this.onHide);
+		this.keyboard.off("key", this.onKey);
+		this.keyboard = null;
+	}
 }
 
 if (window.acode) {
-		const acodePlugin = new KeyboardPlugin();
-		acode.setPluginInit("keyboard-example", (baseUrl, $page, { cacheFile, cacheFileUrl }) => {
-				if (!acodePlugin.initialized) {
-						acodePlugin.initialized = true;
-						// Initialize plugin
-				}
-		});
+	const acodePlugin = new KeyboardPlugin();
+
+	acode.setPluginInit(plugin.id, async () => {
+		await acodePlugin.init();
+	});
+
+	acode.setPluginUnmount(plugin.id, () => {
+		acodePlugin.destroy();
+	});
 }
 ```
 
-This example demonstrates listening for keyboard visibility changes and implementing custom keyboard shortcuts in an Acode plugin.
+This example demonstrates listening for keyboard visibility changes and reacting to a keyboard shortcut. Keep the `key` handler light: it runs for key presses, not only for the shortcut you care about. The handler only logs; call the editor command you need (for example from the [Commands](./commands.md) API) instead of showing an alert.
